@@ -5,6 +5,7 @@ import org.pin.certificateauthenticator.service.CertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ public class CertificateController {
 
     // /api/certificate/save
     @PostMapping("/save")
+    @PreAuthorize("hasRole('ADMIN')")
     public String saveCertificate(@RequestParam("file") MultipartFile file,
                                   @ModelAttribute CertificateEntity certificateEntity) {
 
@@ -33,7 +35,7 @@ public class CertificateController {
         return certificateService.verifyCertificate(serialNumber);
     }
 
-    // /api/certificate/file?serialNumber=12345&password=abcd1234
+    // /api/certificate/download?serialNumber=12345&password=abcd1234
     @PostMapping("/download")
     public ResponseEntity<Resource> getCertificateFile(@RequestParam String serialNumber, @RequestParam String password) throws IOException, IOException {
         return certificateService.downloadCertificate(serialNumber,password);

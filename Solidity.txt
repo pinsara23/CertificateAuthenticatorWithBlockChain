@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract CertificateRegistry {
+    address public admin;
+
+    struct Certificate {
+        string nic;
+        bool isValid;
+    }
+
+    mapping(string => Certificate) private certificates;
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    // Now only takes Serial and NIC
+    function issueCertificate(string memory _serial, string memory _nic) public {
+        require(msg.sender == admin, "Only the admin can issue certificates!");
+        certificates[_serial] = Certificate(_nic, true);
+    }
+
+    // Now only returns NIC and isValid
+    function verifyCertificate(string memory _serial) public view returns (string memory, bool) {
+        require(certificates[_serial].isValid == true, "Certificate does not exist");
+        return (certificates[_serial].nic, certificates[_serial].isValid);
+    }
+}
