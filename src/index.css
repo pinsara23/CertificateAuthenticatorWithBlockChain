@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Manrope, "Segoe UI", sans-serif;
+  color: #0f172a;
+  background: #f4f7fd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 0%, #eff5ff 0%, rgba(239, 245, 255, 0) 35%),
+    radial-gradient(circle at 90% 0%, #ebeaff 0%, rgba(235, 234, 255, 0) 28%),
+    linear-gradient(180deg, #f9fbff 0%, #eef3ff 46%, #f9fbff 100%);
+}
+
+h1,
+h2,
+h3 {
+  font-family: Fraunces, Georgia, serif;
+  letter-spacing: -0.01em;
+}
